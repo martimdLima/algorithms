@@ -1,44 +1,5 @@
 class Solution:
     def sortArray(self, nums: List[int]) -> List[int]:
-        def quick_sort(left, right):
-            # Base case: If the current segment is empty or has only one element, no need to sort.
-            if left >= right:
-                return
-
-            # Choose a random pivot element from the segment.
-            pivot = nums[randint(left, right)]
-
-            # three-way partitioning
-            less_than_pointer, greater_than_pointer, current = left - 1, right + 1, left
-
-            current_is_greater_than_pointer = current < greater_than_pointer
-
-            while current_is_greater_than_pointer:
-                # Move the element to the segment with elements less or greater than pivot or continue to the next element if equal
-                if nums[current] < pivot:
-                    less_than_pointer += 1
-                    nums[less_than_pointer], nums[current] = (
-                        nums[current],
-                        nums[less_than_pointer],
-                    )
-                    current += 1
-                elif nums[current] > pivot:
-                    greater_than_pointer -= 1
-                    nums[greater_than_pointer], nums[current] = (
-                        nums[current],
-                        nums[greater_than_pointer],
-                    )
-                else:
-                    current += 1
-
-            # Recursively apply quick sort to the segment with elements less than and greater than pivot.
-            quick_sort(left, less_than_pointer)
-            quick_sort(greater_than_pointer, right)
-
-        quick_sort(0, len(nums) - 1)
-        return nums
-
-    def sortArray(self, nums: List[int]) -> List[int]:
         """
         Sorts an array using the 3-way quick sort algorithm with random pivot selection.
 
